@@ -1,0 +1,20 @@
+{
+  "name": "clawdsitter",
+  "version": "0.1.0",
+  "description": "overnight babysitter for claude code - auto-recovers from api errors & usage limits",
+  "type": "module",
+  "bin": {
+    "clawdsitter": "./bin.js"
+  },
+  "scripts": {
+    "test": "node scripts/run-tests.mjs",
+    "test:raw": "node --test --test-force-exit",
+    "start": "node bin.js"
+  },
+  "dependencies": {
+    "@lydell/node-pty": "^1.1.0",
+    "node-notifier": "^10.0.1"
+  },
+  "author": "jxherc",
+  "license": "MIT"
+}

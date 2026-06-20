@@ -1,0 +1,26 @@
+Real `bin.js` end-to-end smoke (wrapping node test/fake-claude.js through a real ConPTY).
+CLAWDSITTER_HOME pointed at a temp config with tiny timings + toast off.
+
+### mode=transient exit=0 ###
+-- passthrough --
+API Error: Unable
+RESUMED:continue
+-- log --
+2026-06-20 21:52:51  start  watching: node test/fake-claude.js transient
+2026-06-20 21:52:51  retry  transient attempt 1/1
+2026-06-20 21:52:51  resumed  recovered after 1 attempt(s)
+2026-06-20 21:52:52  exit  child exited code=0
+
+### mode=limit exit=0 ###
+-- passthrough --
+RESUMED:continue
+hit your usage limit
+-- log --
+2026-06-20 21:52:52  start  watching: node test/fake-claude.js limit
+2026-06-20 21:52:53  limit  waiting ~0s for usage reset + grace
+2026-06-20 21:52:53  resumed  resumed after usage limit (#1)
+2026-06-20 21:52:54  exit  child exited code=0
+
+Both paths: error/limit detected -> resume phrase injected -> child resumed (RESUMED:continue)
+-> clean exit. The two regression bugs (bare-command spawn failure; false gave-up from stale
+carryover) are fixed and verified here.

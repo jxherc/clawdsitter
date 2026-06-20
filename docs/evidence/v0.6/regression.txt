@@ -1,0 +1,12 @@
+PASS  cli.test.js          pass=9 fail=0
+PASS  config.test.js       pass=9 fail=0
+PASS  detector.test.js     pass=11 fail=0
+PASS  e2e.test.js          pass=4 fail=0
+PASS  log.test.js          pass=9 fail=0
+PASS  notify.test.js       pass=4 fail=0
+PASS  ptyHost.test.js      pass=11 fail=0
+PASS  resetTime.test.js    pass=10 fail=0
+PASS  resolve.test.js      pass=7 fail=0
+PASS  supervisor.test.js   pass=10 fail=0
+
+TOTAL  pass=84 fail=0  (files failed: 0)

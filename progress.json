@@ -1,0 +1,56 @@
+{
+  "project": "clawdsitter",
+  "microversions": [
+    {
+      "id": "v0.1",
+      "title": "Foundations (config + log)",
+      "status": "done",
+      "tasks": [
+        { "id": "v0.1-config", "title": "config loader: DEFAULTS + ~/.clawdsitter/config.json merge + duration parsing", "status": "done", "tests": 9, "minTests": 8 },
+        { "id": "v0.1-log", "title": "append-only log with 500-line trim", "status": "done", "tests": 9, "minTests": 8 }
+      ]
+    },
+    {
+      "id": "v0.2",
+      "title": "Detector",
+      "status": "done",
+      "tasks": [
+        { "id": "v0.2-detector", "title": "classify(text) -> transient|limit|null, ansi-strip, configurable patterns, stale-buffer guard", "status": "done", "tests": 11, "minTests": 8 }
+      ]
+    },
+    {
+      "id": "v0.3",
+      "title": "Reset-time parser",
+      "status": "done",
+      "tasks": [
+        { "id": "v0.3-resettime", "title": "parseReset(text, now) -> Date|null with rollover", "status": "done", "tests": 10, "minTests": 8 }
+      ]
+    },
+    {
+      "id": "v0.4",
+      "title": "Supervisor state machine",
+      "status": "done",
+      "tasks": [
+        { "id": "v0.4-supervisor", "title": "backoff + wait-for-reset orchestration, injected deps, maxResumes", "status": "done", "tests": 10, "minTests": 8 }
+      ]
+    },
+    {
+      "id": "v0.5",
+      "title": "PTY host + notifications",
+      "status": "done",
+      "tasks": [
+        { "id": "v0.5-ptyhost", "title": "ptyHost passthrough/write/resize", "status": "done", "tests": 11, "minTests": 8 },
+        { "id": "v0.5-notify", "title": "notify toast gated by config", "status": "done", "tests": 4, "minTests": 4 }
+      ]
+    },
+    {
+      "id": "v0.6",
+      "title": "CLI wiring + end-to-end",
+      "status": "done",
+      "tasks": [
+        { "id": "v0.6-cli", "title": "index.js + bin.js arg parse + wiring + command resolution (PATH/.cmd)", "status": "done", "tests": 16, "minTests": 8 },
+        { "id": "v0.6-e2e", "title": "fake-claude harness + both recovery paths end-to-end", "status": "done", "tests": 4, "minTests": 4 }
+      ]
+    }
+  ]
+}

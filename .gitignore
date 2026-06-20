@@ -1,0 +1,8 @@
+node_modules/
+*.log
+.DS_Store
+# evidence dumps can get big; keep findings.md, ignore recordings
+docs/evidence/**/*.cast
+docs/evidence/**/raw-*.txt
+
+.smoke-home/
