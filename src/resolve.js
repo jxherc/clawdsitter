@@ -23,8 +23,12 @@ export function resolveCommand(command, opts = {}) {
   const exts = isWin ? (env.PATHEXT || '.COM;.EXE;.BAT;.CMD').split(';') : ['']
   const dirs = (env.PATH || env.Path || '').split(delimiter).filter(Boolean)
   const hasExt = extname(command) !== ''
+  // if no extension given: on windows probe ONLY the PATHEXT exts (an extensionless
+  // file like npm's nix `claude` sh-shim can't be CreateProcess'd -> error 193, and
+  // it'd shadow the real claude.cmd). on nix the empty ext is the executable.
+  const probe = hasExt ? [''] : isWin ? exts : ['', ...exts]
   for (const d of dirs) {
-    for (const ext of hasExt ? [''] : ['', ...exts]) {
+    for (const ext of probe) {
       const candidate = join(d, command + ext)
       if (exists(candidate)) return wrap(candidate, isWin, comspec)
     }

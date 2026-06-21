@@ -47,6 +47,23 @@ test('PATHEXT order is respected (.EXE found before .CMD when both exist)', () =
   assert.deepEqual(r.args, [])
 })
 
+// real-world repro of error 193: npm installs `claude` (bare nix sh-shim, no ext),
+// `claude.cmd`, and `claude.ps1` side by side. on windows we must pick the .cmd and
+// wrap it through cmd.exe, NOT hand the extensionless sh-shim to node-pty (which
+// CreateProcess rejects as ERROR_BAD_EXE_FORMAT).
+test('bare nix shim alongside .cmd does not shadow the .cmd on windows', () => {
+  const bare = join('C:\\bin', 'claude')
+  const cmd = join('C:\\bin', 'claude.CMD')
+  const r = resolveCommand('claude', {
+    platform: 'win32',
+    env: WINENV,
+    exists: mkExists([bare, cmd]),
+    comspec: 'C:\\Windows\\System32\\cmd.exe',
+  })
+  assert.equal(r.file, 'C:\\Windows\\System32\\cmd.exe')
+  assert.deepEqual(r.args, ['/c', cmd])
+})
+
 test('not found returns the command as-is for a clear spawn error', () => {
   const r = resolveCommand('nope', { platform: 'win32', env: WINENV, exists: mkExists([]) })
   assert.equal(r.file, 'nope')
